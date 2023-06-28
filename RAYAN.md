@@ -93,3 +93,17 @@ On peut mentionner l'algorithme 8-bit optimizer, qui permet de diminuer par 4 le
 Ressources:
 - Présentation de la bibliothèque bitsandbytes pour la quantization : https://huggingface.co/blog/hf-bitsandbytes-integration
 - Tutoriel OpenLLM France pour le finetuning avec qLoRA : https://colab.research.google.com/github/OpenLLM-France/Tutoriel/blob/main/01_qlora_fine_tuning.ipynb
+
+## Encoder models
+
+Les modèles encodeur n'utilisent que la partie encodeur du transformeur. ils visent à encoder une certaine quantité d'informations et une compréhension globale sur la phrase placée en input, sous la forme de représentation vectorielle. Les couches d'attention formulent les liens entre tous les tokens de l'input, c'est la self-attention.
+
+Ils sont souvent utilisés pour la classification de phrases et la classification de mots.
+
+Le pré-entraînement consiste principalement en la reconstitution d'une phrase bruitée, où des mots ont été retirés, masqués, inversés etc. Les phrases sont tirées de corpus de données et bruitées avec une fonction de bruitage, c'est donc de l'entraînement non supervisé.
+
+BERT est un exemple de modèle fondation d'architecture encodeur développé par Google.
+
+Références:
+- BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding https://arxiv.org/abs/1810.04805
+- Encoder models https://huggingface.co/learn/nlp-course/chapter1/5?fw=pt
