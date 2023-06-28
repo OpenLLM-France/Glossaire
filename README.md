@@ -8,15 +8,15 @@
 [![](https://img.shields.io/github/license/OpenLLM-France/Tutoriel)](https://github.com/OpenLLM-France/Tutoriel/blob/main/LICENSE)
 [![](https://dcbadge.vercel.app/api/server/hsp8BpRkY?compact=true&style=flat)](https://discord.gg/hsp8BpRkY)
 
-## Modèle de language géant (Large Language Model, LLM)
+## Modèle de langage géant (Large Language Model, LLM)
 
-Un réseau de neuronnes artificiel destiné à modéliser le language naturel, et dôté d'un très grand nombre de paramètres numériques (540Md pour Google PaLM, 170Md pour GPT3, 40Md pour Falcon).
+Un réseau de neurones artificiel destiné à modéliser le langage naturel, et dôté d'un très grand nombre de paramètres numériques (540Md pour Google PaLM, 170Md pour GPT3, 40Md pour Falcon).
 
-## Réseau de neuronnes artificiel (Artificial Neural Network, ANN)
+## Réseau de neurones artificiel (Artificial Neural Network, ANN)
 
-Les réseaux de neuronnes artificiels tentent de répliquer la structure du cerveau (des neuronnes, reliés entre eux par des connexions, les synapses). Un ANN est une succession de couches de neuronnes ; chaque connexion comptant pour un paramètre, que l'on appelle _poids_. Plus le poids d'une connexion est grand, plus la connexion est forte, et plus le neuronne de sortie répondra positivement à une forte stimulation du neuronne d'entrée.
+Les réseaux de neurones artificiels tentent de répliquer la structure du cerveau (des neurones, reliés entre eux par des connexions, les synapses). Un ANN est une succession de couches de neurones ; chaque connexion comptant pour un paramètre, que l'on appelle _poids_. Plus le poids d'une connexion est grand, plus la connexion est forte, et plus le neurone de sortie répondra positivement à une forte stimulation du neurone d'entrée.
 
-La structure la plus basique d'un ANN est la structure _Feed Forward_, ou tous les neuronnes composant chaque couche sont reliés à tous les neuronnes de la couche suivante. Il existe évidemment des structures plus complexes de ANN, utilisés en _Computer Vision_ comme en _Natural Language Processing_.
+La structure la plus basique d'un ANN est la structure _Feed Forward_, ou tous les neurones composant chaque couche sont reliés à tous les neurones de la couche suivante. Il existe évidemment des structures plus complexes d'ANN, utilisées en _Computer Vision_ comme en _Natural Language Processing_.
 
 <p align="center">
   <img src="assets/feed_forward.png" alt="Feed Forward Neural Network"/>
@@ -24,19 +24,21 @@ La structure la plus basique d'un ANN est la structure _Feed Forward_, ou tous l
   Un ANN simple (<a href="https://deepai.org/machine-learning-glossary-and-terms/feed-forward-neural-network">source</a>)
 </p>
 
-Lorsqu'on parle "d'entrainer un modèle", on fait référence au fait de rechercher itérativement la valeur optimale de ses paramètres. Le procédé mathématique associé est la _déscente de gradient stochastique_.
+Lorsqu'on parle "d'entraîner un modèle", on fait référence au fait de rechercher itérativement la valeur optimale de ses paramètres. Le procédé mathématique associé est la _descente de gradient_.
 
 ## Modèle fondation (Foundation Model)
 
-Un LLM ayant été suffisamment entrainé pour comprendre les propriétés fondamentales du language naturel : structure des phrases, raisonnement de bases, etc. Cependant, un modèle fondation n'est **pas encore prêt à être utilisé** car il n'a pas encore été entrainé à réaliser des taches concrètes, comme le résumé de textes, la traduction, l'analyse de sentiments...
+Un LLM ayant été suffisamment entrainé pour comprendre les propriétés fondamentales du langage naturel : structure des phrases, raisonnement de bases, etc. Cependant, un modèle fondation n'est **pas encore prêt à être utilisé**, car il n'a pas encore été entrainé à réaliser des taches concrètes, comme le résumé de texte, la traduction, l'analyse de sentiments...
 
-GPT1 a montré qu'il est plus efficace de d'abord pré-entrainer des LLM sur des datasets de grande taille, avant de le spécialiser dans des taches concrètes à travers une étape de [Fine-tuning](#fine-tuning) (plus d'informations disponibles dans cette section).
+GPT1 a montré qu'il est plus efficace de pré-entrainer d'abord  des LLM sur des datasets de grande taille, avant de le spécialiser dans des taches concrètes à travers une étape de [Fine-tuning](#fine-tuning) (plus d'informations disponibles dans cette section).
+
+> [Plus d'informations sur GPT1](https://openai.com/research/language-unsupervised)
 
 **Ce sont les modèles fondation qui concentrent les enjeux des LLM open-source aujourd'hui.** Constituer un jeu d'entrainement puis pré-entrainer un LLM à plusieurs centaines de millions (milliards?) de paramètres requiert une puissance de calcul très importante. De ce fait, les grands projets comme [Bloom](https://arxiv.org/abs/2211.05100) ou plus récemment [Falcon](https://huggingface.co/blog/falcon) visent à entrainer des modèles fondation open-source, prêts à être [fine-tunés](#fine-tuning), de sorte à ce que les chercheurs ou universitaires n'ayant pas accès à de tels moyens puissent tout de même faire travailler sur ces modèles massivement pré-entrainés, afin de faire avancer le domaine des LLM.
 
 ## Fine-Tuning
 
-Aujourd’hui, les LLMs sont d’abord pré-entrainés sur de gigantesques datasets d’entrainement grâce à l'apprentissage semi-supervisé (sans l'invervention systématique de l'homme). Ces datasets d'entrainement sont collectés puis filtrés automatiquement grâce à Internet : blogposts, articles scientifiques, réseaux sociaux...
+Aujourd’hui, les LLMs sont d’abord pré-entrainés sur de gigantesques datasets d’entrainement grâce à l'apprentissage semi-supervisé (sans invervention humaine systématique). Ces datasets d'entrainement sont collectés automatiquement sur Internet (blogposts, articles scientifiques, réseaux sociaux...), puis filtrés.
 
 Seulement, ce pré-entrainement à lui seul n’est pas assez efficace pour apprendre au modèle à effectuer une tache spécifique concrète (appelée _downstream task_), comme la traduction, le résumé de texte... Souvent, ce pre-training n’apprend au modèle que des propriétés générales du langage : signification du vocabulaire, structure des phrases, raisonnements de base...
 
@@ -50,23 +52,23 @@ Souvent, cette étape de l'entrainement est réalisée avec un dataset plus réd
   Entrainement standard d'un LLM (<a href="https://fatyanosa.medium.com/fine-tuning-pre-trained-transformer-based-language-model-c542af0e7fc1">source</a>)
 </p>
 
-Cette pratique n'est pas du tout pas spécifique au NLP : en _Computer Vision_ par exemple, la technique des _LoRA_ permet d'apprendre aux fameux modèles de type _Stable Diffusion_ des connaissances picturales sans avoir à ré-entrainer tout le modèle (seulement une infime partie de connexions judicieusement positionnées).
+Cette pratique n'est pas du tout spécifique au NLP : en _Computer Vision_ par exemple, la technique des _LoRA_ permet d'apprendre aux fameux modèles de type _Stable Diffusion_ des connaissances picturales sans avoir à ré-entrainer tout le modèle (seulement une infime partie de connexions judicieusement positionnées).
 
 ## Instruction-Tuning
 
-Il s'agit d'un type spécifique de fine-tuning. On apprend au modèle à bien réagir face à des instructions du type "Peux-tu me résumer le texte suivant: [...]" ou encore "Traduit en anglais la phrase suivante: [...]". Il s'agit d'instructions que l'utilisateur pourrait fournir à un ChatBot tel que ChatGPT pour intéragir avec un modèle de manière conversationnelle.
+Il s'agit d'un type spécifique de fine-tuning. On apprend au modèle à bien réagir face à des instructions du type "Peux-tu me résumer le texte suivant: [...]" ou encore "Traduis en anglais la phrase suivante: [...]". Il s'agit d'instructions que l'utilisateur pourrait fournir à un ChatBot tel que ChatGPT pour intéragir avec un modèle de manière conversationnelle.
 
 ## Apprentissage par renforcement avec retour humain (Reinforcement learning from Human Feedback, RLHF)
 
-Le reinforcement learning fait référence à une technique d'apprentissage où le LLM évolue dans un environnement fictif : cet environnement fournit à chaque instant un état au LLM, qui effectue des décisions en fonction desquelles il se voit récompenser. Il s'agit de la troisième technique majeure d'apprentissage, en plus de _l'apprentissage supervisé_ et de _l'apprentissage non supervisé_.
+Le reinforcement learning fait référence à une technique d'apprentissage où le LLM évolue dans un environnement fictif : cet environnement fournit à chaque instant un état au LLM, qui effectue des décisions en fonction desquelles il se voit récompensé. Il s'agit de la troisième technique majeure d'apprentissage, en plus de _l'apprentissage supervisé_ et de _l'apprentissage non supervisé_.
 
-Le RLHF consiste concrètement en une boucle fermée où les éxaminateurs stimulent le modèle puis en corrige les prédictions afin de l'améliorer continuellement. En pratique pour les LLM, il est principalement utilisé en conjonction avec un entrainement type [Fine-tuning](#fine-tuning), par exemple pour bannir certaines réponses jugées immorales ou vulgaires.
+Le RLHF consiste concrètement en une boucle fermée où les éxaminateurs stimulent le modèle puis en corrigent les prédictions afin de l'améliorer continuellement. En pratique pour les LLMs, il est principalement utilisé en conjonction avec un entrainement type [Fine-tuning](#fine-tuning), par exemple pour bannir certaines réponses jugées immorales ou vulgaires. C'est une manière d'aligner les outputs du modèle aux préférences humaines.
 
 ## Surajustement, Sous-ajustement (Overfitting, Underfitting)
 
-L'overfitting est un problème rencontré lorsqu'un modèle trop adapté à un dataset particulier. Dès lors, il sous-performera lorsque utilisé en dehors de sa "zone de confort". Pour résoudre l'overfitting, il faut moins entrainer le modèle ou augmenter la qualité du dataset (taille, diversité) pour le rendre plus complexe.
+L'overfitting est un problème rencontré lorsqu'un modèle est sur-entrainé sur un dataset particulier. Dès lors, il sous-performera lorsque utilisé en dehors de sa "zone de confort". Pour résoudre l'overfitting, il faut moins entrainer le modèle (en diminuant le nombre de cycles d'entrainement), ou augmenter la qualité du dataset (taille, diversité) pour le rendre plus polyvalent.
 
-L'underfitting est simplement l'inverse : cela fait référence à un [ANN](#réseau-de-neuronnes-artificiel-artificial-neural-network-ann) qui sous-performe car il n'a pas été assez entrainé sur un dataset particulier. Il n'arrivera alors pas à en capter toutes les subtilités et renverra une réponse approchée, de faible qualité. Pour résoudre l'underfitting, il faut entrainer le modèle plus longtemps.
+L'underfitting est simplement l'inverse : cela fait référence à un [ANN](#réseau-de-neurones-artificiel-artificial-neural-network-ann) qui sous-performe car il n'a pas été assez entrainé sur un dataset particulier. Il n'arrivera alors pas à en capter toutes les subtilités et renverra une réponse approchée, de faible qualité. Pour résoudre l'underfitting, il faut entrainer le modèle plus longtemps.
 
 <p align="center">
   <img src="assets/fitting.PNG" style="width: 80%;" alt="Overfitting et Underfitting"/>
@@ -76,7 +78,7 @@ L'underfitting est simplement l'inverse : cela fait référence à un [ANN](#ré
 
 ## Hallucination
 
-Une hallucination est une réponse produite par le modèle d'IA, qui peut patraître correcte, mais qui n'est pas justifiée par ses données d'entraînement. Souvent, le modèle parait confiant, "sur de ce qu'il avance" lorsqu'il hallucine.
+Une hallucination est une réponse produite par le modèle d'IA, qui peut paraître correcte, mais qui n'est pas justifiée par ses données d'entraînement. Souvent, le modèle parait sûr de lui lorsqu'il hallucine.
 
 Cette définition peut être choisie plus ou moins stricte. Par exemple, dans le domaine du résumé automatique de texte, une hallucination peut aussi désigner le fait que le modèle rajoute des éléments au résumé qui ne figurent pas dans le texte.
 
@@ -87,15 +89,15 @@ Quelques exemples :
 > [How to Reduce the Hallucinations from Large Language Models](https://thenewstack.io/how-to-reduce-the-hallucinations-from-large-language-models/)\
 > [Page Wikipédia sur les hallucinations en NLP](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence))
 
-Generative Pre-Trained Transformer (GPT) fait référence à une famille de [transformeurs](#transformeur-transformer), au-delà des modèles développés par OpenAI. Ces modèles ont une structure de type Decoder-Only et sont des [Causal Language Models](#causal-language-modeling). L'objectif de pré-entraînement est la prédiction du token suivant (_next token prediction_). Cela leur permet, à partir d'un contexte donné, de générer une séquence de tokens en rajoutant à chaque fois le dernier token généré à l'input.
+Generative Pre-Trained Transformer (GPT) fait référence à une famille de [transformeurs](#transformeur-transformer), au-delà des modèles développés par OpenAI. Ces modèles ont une structure de type Decoder-Only et sont des [Causal Language Models](#causal-language-modeling). L'objectif de pré-entraînement est la prédiction du token suivant (_next token prediction_). Cela leur permet, à partir d'un contexte donné, de générer une séquence de tokens en rajoutant à chaque fois le dernier token généré à l'entrée.
 
 ## Transformeur (Transformer)
 
-Structure particulière de [modèle de language géant](#modèle-de-language-géant-large-language-model-llm). [Depuis 2017](https://arxiv.org/abs/1706.03762), il s'agit de la famille de LLMs avec laquelle on obtient les meilleures performances dans le traitement du langage naturel dans toutes les tâches communes : traduction, ChatBot, résumé de texte... Il a remplacé les _réseaux de neurones récurrents_ (RNN) dont l'un des points faibles est l'établissement de relations entre des mots distants.
+Structure particulière de [modèle de langage géant](#modèle-de-langage-géant-large-language-model-llm). [Depuis 2017](https://arxiv.org/abs/1706.03762), il s'agit de la famille de LLMs avec laquelle on obtient les meilleures performances dans le traitement du langage naturel dans toutes les tâches communes : traduction, ChatBot, résumé de texte... Il a remplacé les _réseaux de neurones récurrents_ (RNN) dont l'un des points faibles est l'établissement de relations entre des mots distants.
 
 Son atout est son système d'[attention](#attention) qui lui permet d'exploiter les relations entre les mots (notamment les références telles que "il" ou "ce dernier"), pour inférer la signification d'une phrase.
 
-La structure initiale transformeur est composée une pile d'[encodeurs](#modèles-encoder-only-encoder-only-models) connectée à une pile de [décodeurs](#generative-pre-trained-transformerdecoder-only-model), même si cette dernière a été largement adaptée depuis. Aujourd'hui, les LLM les plus performants suivent une architecture type de [Decoder-Only](#generative-pre-trained-transformerdecoder-only-model) même si les structures de type [Encoder-Only](#modèles-encoder-only-encoder-only-models) sont encore utilisées pour la classification ou la mesure de performances de modèles, entre autres.
+La structure initiale transformeur est composée une pile d'[encodeurs](#modèles-encoder-only-encoder-only-models) connectée à une pile de [décodeurs](#generative-pre-trained-transformerdecoder-only-model), même si cette dernière a été largement adaptée depuis. Aujourd'hui, les LLM les plus performants pour la génération suivent une architecture type de [Decoder-Only](#generative-pre-trained-transformerdecoder-only-model) même si les structures de type [Encoder-Only](#modèles-encoder-only-encoder-only-models) sont encore utilisées pour la classification ou la mesure de performances de modèles, entre autres.
 
 <p align="center">
   <img src="assets/transformer_model.png" style="width: 50%;" alt="Structure initiale du transformeur"/>
@@ -115,9 +117,9 @@ Le pré-entraînement d'un tel LLM consiste principalement en la reconstitution 
 
 ## Modèles Encoder-Decoder (Encoder-Decoder Models)
 
-Il s'agit de la structure qui avait été présentée dans le [papier initial du transformeur](https://arxiv.org/abs/1706.03762). Ce modèle est composé d'un [encodeur](#modèles-encoder-only-encoder-only-models), dont la fonction est d'encoder la phrase i.e en trouver une représentation vectorielle qui tient compte de sa signification, et d'un [décodeur](#generative-pre-trained-transformerdecoder-only-model), dont la fonction est de générer un texte, étant donné le contexte fourni par l'encodeur.
+Il s'agit de la structure qui avait été présentée dans le [papier initial du transformeur](https://arxiv.org/abs/1706.03762). Ce modèle est composé d'un [encodeur](#modèles-encoder-only-encoder-only-models), dont la fonction est d'encoder la phrase i.e en trouver une représentation vectorielle qui tient compte de sa signification et des liens relatifs entre tokens, et d'un [décodeur](#generative-pre-trained-transformerdecoder-only-model), dont la fonction est de générer un texte, étant donné le contexte fourni par l'encodeur.
 
-Les modèles Encoder-Decoder ne sont majoritairement plus développés, étant donné que de meilleures performances sont obtenus plus simplement par les modèles de type Decoder-Only. On peut tout de même citer [BART](https://arxiv.org/abs/1910.13461) qui est resté l'état de l'art en 2019 en matière de tâches génératives, ou encore [T5](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html) (_Text-to-Text Transfer Transformer_) dont la spécifité est de traiter toutes les _drownstream tasks_ en langage naturel brut ("traduit en français: [...]" ou "résume ce texte: [...]").
+Les modèles Encoder-Decoder ne sont majoritairement plus développés, étant donné que de meilleures performances sont obtenues plus simplement par les modèles de type Decoder-Only. On peut tout de même citer [BART](https://arxiv.org/abs/1910.13461) qui est resté l'état de l'art en 2019 en matière de tâches génératives, ou encore [T5](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html) (_Text-to-Text Transfer Transformer_) dont la spécifité est de traiter toutes les _drownstream tasks_ en langage naturel brut ("traduit en français: [...]" ou "résume ce texte: [...]").
 
 ## Apprentissage en contexte (N-shot learning)
 
@@ -145,7 +147,7 @@ T5, un modèle [Encoder-Decoder développé par Google](https://arxiv.org/abs/19
 
 > [Guiding Large Language Models towards Task-Specific Inference - Prompt Design and Soft Prompts](https://towardsdatascience.com/guiding-a-huge-language-model-lm-to-perform-specific-tasks-prompt-design-and-soft-prompts-7c45ef4794e4)
 
-## Modélisation causale de language (Causal Language Modeling, CLM)
+## Modélisation causale du langage (Causal Language Modeling, CLM)
 
 C'est un type de modèle de langage qui s'applique aux transformeurs de type Decoder-Only. On considère une séquence de tokens placée en entrée d'un modèle de ce type. Pour un token donné, le processus d'attention fait uniquement référence à tous les tokens qui le précèdent.
 
